@@ -9,19 +9,26 @@
 // showFirstMassage("hello there");
 // console.log(num);
 
-function calc(a,b) {
-    return(a + b);
-}
+// function calc(a,b) {
+//     return(a + b);
+// }
 
-console.log(calc(3,4));
+// console.log(calc(3,4));
 
-console.log(calc(8,4));
+// console.log(calc(8,4));
 
 
-function retVar() {
-    let num = 50;
-    return num;
-}
+// function retVar() {
+//     let num = 50;
+//     return num;
+// }
 
-let anotherVar = retVar();
-console.log(anotherVar);
+// let anotherVar = retVar();
+// console.log(anotherVar);
+
+let str = "test";
+console.log(str.length);
+
+let twelve = '12.2px';
+console.log(parseInt(twelve));
+console.log(parseFloat(twelve));
