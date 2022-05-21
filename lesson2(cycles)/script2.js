@@ -70,17 +70,7 @@ let appData = {
 let optionalExpenses = {
 
 }
-/*
-function chooseOptExpenses(){               // Функция для определения необязательных расходов
-    for (let i = 1; i <= 3; i++){
-        let questionOptExpenses = prompt("Статья необязательных расходов?");
 
-        appData.optionalExpenses[i] = questionOptExpenses;
-        console.log(appData.optionalExpenses);
-    }
-}
-chooseOptExpenses();
-*/
 
 function chooseOptExpenses(){ 
     for (let i = 0; i < 3; i++){
