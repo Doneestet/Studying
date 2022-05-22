@@ -166,18 +166,18 @@
 
 
 
-function Accumulator(startingValue) {
-    this.value = startingValue;
-    this.read = function () {
-        this.value += +prompt(' Сколько добавить?', 0);
-    };
-}
+// function Accumulator(startingValue) {
+//     this.value = startingValue;
+//     this.read = function () {
+//         this.value += +prompt(' Сколько добавить?', 0);
+//     };
+// }
 
-let accumulator = new Accumulator(2);
+// let accumulator = new Accumulator(2);
 
-accumulator.read();
-accumulator.read();
+// accumulator.read();
+// accumulator.read();
 
-console.log(accumulator);
-alert(accumulator.value);
+// console.log(accumulator);
+// alert(accumulator.value);
 
