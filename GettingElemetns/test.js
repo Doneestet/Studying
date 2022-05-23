@@ -2,8 +2,8 @@ let box = document.getElementById('box'), // получаем элемент п�
     btn = document.getElementsByTagName('button'), //получаем елементы по тэгам
     circle = document.getElementsByClassName('circle'), //получаем елементы по классу 
     heart = document.querySelectorAll('.heart'), // получу все элементы
-    oneHeart = document.querySelector('.heart'); // получу первый или указанный элемент
-    wrapper = document.querySelector('.heart');
+    oneHeart = document.querySelector('.heart'), // получу первый или указанный элемент
+    wrapper = document.querySelector('.wrapper');
 
 // console.log(box);
 // console.log(btn);
@@ -35,16 +35,17 @@ let div = document.createElement('div'),        // создаем эл. div
 div.classList.add('black'); // classList - метод с разными свойствами. Добавляем черный прямоуг.
 
 // document.body.appendChild((div));   // добавляем эл. в конец body в html
-// wrapper.appendChild(div);   // добавляем эл. в конец обертки wrapper в html
+wrapper.appendChild(div);   // добавляем эл. в конец обертки wrapper в html
 
-div.innerHTML = "<h1>Hello world!</h1>"; // добавляет внутрь HTML любые данные;
-div.textContent = 'hello world'; // добавляет текст на страницу. безопасный способ взаимодействия
+// div.innerHTML = "<h1>Hello world!</h1>"; // добавляет внутрь HTML любые данные;
+// div.textContent = 'hello world'; // добавляет текст на страницу. безопасный способ взаимодействия
 
 document.body.insertBefore(div, circle[0]); // вставить эл. перед другим эл.
-document.body.removeChild(circle[1]);   // удалить элемент
-wrapper.removeChild(heart[1]);  
+document.body.removeChild(circle[2]);   // удалить элемент
+
 
 document.body.replaceChild(btn[1], circle[1]);
 
 console.log(div);
 
+wrapper.removeChild(heart[1]);  
