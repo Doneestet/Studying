@@ -1,7 +1,7 @@
 'use strict'
 
 let startBtn = document.getElementById('start'),
-    saveAll = document.getElementById('saveAll'),
+    // saveAll = document.getElementById('saveAll'),
     budgetValue = document.getElementsByClassName('budget-value')[0],
     dayBudgetValue = document.getElementsByClassName('daybudget-value')[0],
     levelValue = document.getElementsByClassName('level-value')[0],
@@ -29,7 +29,7 @@ let startBtn = document.getElementById('start'),
     expensesBtn.disabled = true;
     optionalExpensesBtn.disabled = true;
     countBtn.disabled = true;
-    saveAll.style.display = "none";
+  
 
     startBtn.addEventListener('click', function () {
          
