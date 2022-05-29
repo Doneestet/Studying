@@ -38,7 +38,7 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
 
     // Timer 
 
-    let deadline = '2022-05-29';
+    let deadline = '2022-08-29';
 
     function getTimeRemaining(endtime) {        // функция для создания новых объектов
         let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -91,7 +91,8 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
     // Modal
     let more = document.querySelector(".more"),
         overlay = document.querySelector(".overlay"),
-        close = document.querySelector(".popup-close");
+        close = document.querySelector(".popup-close"),
+        descriptionbtn = document.querySelector('.description-btn');
 
     more.addEventListener("click", function() {
         overlay.style.display = "block";  // принимает блочную модель
@@ -102,6 +103,18 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
     close.addEventListener('click', function() {
         overlay.style.display = "none";
         more.classList.remove('more-splash');
+        document.body.style.overflow = ""; // разрешаем скролить когда попап закрыт
+    });
+
+    descriptionbtn.addEventListener("click", function() {
+        overlay.style.display = "block";  // принимает блочную модель
+        this.classList.add("more-splash");
+        document.body.style.overflow = "hidden"; // запрещаем скролить пока открыт попап
+    });
+
+    close.addEventListener('click', function() {
+        overlay.style.display = "none";
+        descriptionbtn.classList.remove('more-splash');
         document.body.style.overflow = ""; // разрешаем скролить когда попап закрыт
     });
 
@@ -126,18 +139,12 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
         let request = new XMLHttpRequest();
         request.open('POST', 'server.php');
 
-        /*не json формат
-        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  // говорит что наш контент, коотрый мы отправляем на сервер получен из формы
-
-        let formData = new FormData(form);
-        request.send(formData);
-        */
-
         //JSON формат
         request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
         
         let formData = new FormData(form);
 
+        // создаем промежуточный объект и помещаем в него данные из formData
         let obj = {};
         formData.forEach(function(value, key) {
             obj[key] = value;
@@ -148,8 +155,8 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
 
         //JSON - end
         
-
-        request.addEventListener('readystatechange', function(){
+        // проверка запроса на состояние от 1 до 4
+        request.addEventListener('readystatechange', function(){  
             if (request.readyState < 4) {
                 statusMessage.innerHTML = message.loading;
             } else if (request.readyState === 4 && request.status === 200) {
