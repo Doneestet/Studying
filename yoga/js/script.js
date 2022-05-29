@@ -104,5 +104,64 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
         more.classList.remove('more-splash');
         document.body.style.overflow = ""; // разрешаем скролить когда попап закрыт
     });
+
+    //Form
+
+    let message = {
+        loading: 'Загрузка...',
+        success: 'Спасибо! скоро мы с вами свяжемся!',
+        failure: 'Что-то пошло не так...'
+    };
+
+    let form = document.querySelector('.main-form'),
+        input = document.getElementsByTagName('input'),
+        statusMessage = document.createElement('div');
+
+        statusMessage.classList.add('status');
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();  // не дает странице перезагружаться по умолчанию после каждого клика по форме
+        form.appendChild(statusMessage);  // добавляем див в который поместим уведомление для user
+
+        let request = new XMLHttpRequest();
+        request.open('POST', 'server.php');
+
+        /*не json формат
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');  // говорит что наш контент, коотрый мы отправляем на сервер получен из формы
+
+        let formData = new FormData(form);
+        request.send(formData);
+        */
+
+        //JSON формат
+        request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+        
+        let formData = new FormData(form);
+
+        let obj = {};
+        formData.forEach(function(value, key) {
+            obj[key] = value;
+        });
+        let json = JSON.stringify(obj);
+
+        request.send(json);
+
+        //JSON - end
+        
+
+        request.addEventListener('readystatechange', function(){
+            if (request.readyState < 4) {
+                statusMessage.innerHTML = message.loading;
+            } else if (request.readyState === 4 && request.status === 200) {
+                statusMessage.innerHTML = message.success;
+            } else {
+                statusMessage.innerHTML = message.failure;
+            }
+        });
+            for (let i = 0; i < input.length; i++){ // с помощью цикла очищаем все наши input 
+                input[i].value = '';
+            }
+        
+    });
 });
 
