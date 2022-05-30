@@ -32,7 +32,7 @@
 			<input class="optionalexpenses-item" type="text" id="optionalexpenses_3">
             <button class="optionalexpenses-btn">Утвердить</button>
             
-            <div class="count-budget">Расчет дневного бюджета</div>
+            <!-- <div class="count-budget">Расчет дневного бюджета</div> -->
             <button class="count-budget-btn">Рассчитать</button>
             
             <div class="choose-income-label">Введите статьи возможного дохода через запятую</div>
@@ -49,9 +49,21 @@
             <div class="open">
                 <button class="start" id="start">Начать расчет</button>
                 <!-- <button class="saveall" id="saveall">Сохранить расчет</button> -->
+                <button class="restart" id="restart">Начать заново</button>
             </div>
         </div>
         <div class="result">
+            <div class="time-data">
+                <div class="year">
+                    <input class="year-value" type="text" placeholder="Год" readonly>
+                </div>
+                <div class="month">
+                    <input class="month-value" type="text" placeholder="Месяц" readonly>
+                </div>
+                <div class="day">
+                    <input class="day-value" type="text" placeholder="День" readonly>
+                </div>
+            </div>
             <div class="result-table">
                 <div class="budget">Доход: </div>
                 <div class="budget-value"></div>
@@ -77,20 +89,7 @@
                 <div class="yearsavings">Накопления за 1 год:</div>
                 <div class="yearsavings-value"></div>
             </div>
-            <div class="time-data">
-                <div class="year">
-                    Год:
-                    <input class="year-value" type="text" readonly>
-                </div>
-                <div class="month">
-                    Месяц:
-                    <input class="month-value" type="text" readonly>
-                </div>
-                <div class="day">
-                    День:
-                    <input class="day-value" type="text" readonly>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

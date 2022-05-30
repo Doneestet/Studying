@@ -1,7 +1,7 @@
 'use strict'
 
 let startBtn = document.getElementById('start'),
-    // saveAll = document.getElementById('saveAll'),
+    restartBtn = document.getElementById('restart'),
     budgetValue = document.getElementsByClassName('budget-value')[0],
     dayBudgetValue = document.getElementsByClassName('daybudget-value')[0],
     levelValue = document.getElementsByClassName('level-value')[0],
@@ -26,10 +26,41 @@ let startBtn = document.getElementById('start'),
 
     let money, time;
 
+    // задаем изначальное состоянние "кнопки неактивны"
     expensesBtn.disabled = true;
     optionalExpensesBtn.disabled = true;
     countBtn.disabled = true;
-  
+    countBtn.style.display = 'none';
+    
+
+  // 1 скрывает starbtn после клика
+    function hideStartBtn (){
+        startBtn.style.display ="none";
+        
+    }
+   
+    function hideRestartBtn (){
+        restartBtn.style.display ="none";
+        
+    }
+    hideRestartBtn ();
+
+    function showRestartBtn () {
+        restartBtn.style.display = 'block';
+
+    }
+
+    function showStartBtn () {
+        startBtn.style.display = 'block';
+    }
+
+    restartBtn.addEventListener('click', () =>{
+        hideRestartBtn ();
+        showStartBtn();
+        budgetValue.textContent = '';
+        dayBudgetValue.textContent = '';
+        levelValue.textContent = '';
+    });
 
     startBtn.addEventListener('click', function () {
          
@@ -49,6 +80,10 @@ let startBtn = document.getElementById('start'),
             expensesBtn.disabled = false;
             optionalExpensesBtn.disabled = false;
             countBtn.disabled = false;
+
+            hideStartBtn();
+            showRestartBtn ();
+            useCountBtn();
         });
 
     expensesBtn.addEventListener('click', function() {
@@ -80,7 +115,7 @@ let startBtn = document.getElementById('start'),
         }
     });
 
-    countBtn.addEventListener('click', function() {
+    function useCountBtn () {
         if (appData.budget != undefined) {
 
             appData.moneyPerDay = (appData.budget / 30).toFixed();
@@ -98,7 +133,9 @@ let startBtn = document.getElementById('start'),
         } else {
             dayBudgetValue.textContent = "Произошла ошибка";
         }
-    });
+        
+        
+    };
         
     incomeItem.addEventListener('input', function(){  // при вводе данных сразу отображает их в поле
         let items = incomeItem.value;

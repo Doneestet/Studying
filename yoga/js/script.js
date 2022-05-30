@@ -95,11 +95,11 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
         descriptionbtn = document.querySelector('.description-btn');
 
     more.addEventListener("click", function() {
-        overlay.style.display = "block";  // принимает блочную модель
+        overlay.style.display = "block";  // принимает блочную модель (делает видимым попап)
         this.classList.add("more-splash");
         document.body.style.overflow = "hidden"; // запрещаем скролить пока открыт попап
     });
-
+   
     close.addEventListener('click', function() {
         overlay.style.display = "none";
         more.classList.remove('more-splash');
