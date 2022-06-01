@@ -118,7 +118,7 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
         document.body.style.overflow = ""; // разрешаем скролить когда попап закрыт
     });
 
-    //Form
+    //Form wirh promise
 
     let message = {
         loading: 'Загрузка...',
@@ -126,49 +126,107 @@ window.addEventListener("DOMContentLoaded", function(){ // это событие
         failure: 'Что-то пошло не так...'
     };
 
-    let form = document.querySelector('.main-form'),
+    let form = document.getElementsByClassName('.main-form')[0],
+        formBottom = document.getElementById('form'),
         input = document.getElementsByTagName('input'),
         statusMessage = document.createElement('div');
 
         statusMessage.classList.add('status');
+
+    function sendForm(form) {
+        form.addEventListener('submit', function(event) {
+                event.preventDefault();  // не дает странице перезагружаться по умолчанию после каждого клика по форме
+                form.appendChild(statusMessage); 
+                let formData = new FormData(form);
+
+                function postData(data) {
+
+                    return new Promise (function(resolve, reject) {
+                        let request = new XMLHttpRequest();
+
+                        request.open('POST', 'server.php');
+
+                        request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+                        request.readystatechange = function() {  
+                                if (request.readyState < 4) {
+                                    resolve();
+                                                    
+                                } else if (request.readyState === 4) {
+                                    if( request.status === 200 && request.status < 3) {
+                                        resolve();
+                                } 
+                                else {
+                                        reject();
+                                                    
+                                }
+                            }
+                        }
+                        request.send(data);
+                });
+                } // End postData
+                            
+                            function clearInput () {
+                                for (let i = 0; i < input.length; i++) { 
+                                        input[i].value = '';
+                            }
+                        }
+                        postData(formData)
+                        .then(() => statusMessage.innerHTML = message.loading)
+                        .then(() => {
+                            thanksModal.style.display = 'block';
+                            mainModal.style.display = 'none';
+                            statusMessage.innerHTML = '';
+                        })
+                        .catch(() => statusMessage.innerHTML = message.failure)
+                        .then(clearInput)
+
+                    });
+                    sendForm(form);
+                    sendForm(formBottom);
+    }
+}); 
+    //Form without promise
+     // let form = document.querySelector('.main-form'),
+     // input = document.getElementsByTagName('input'),
+     // statusMessage = document.createElement('div');
     
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();  // не дает странице перезагружаться по умолчанию после каждого клика по форме
-        form.appendChild(statusMessage);  // добавляем див в который поместим уведомление для user
+//     form.addEventListener('submit', function(event) {
+//         event.preventDefault();  // не дает странице перезагружаться по умолчанию после каждого клика по форме
+//         form.appendChild(statusMessage);  // добавляем див в который поместим уведомление для user
 
-        let request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
+//         let request = new XMLHttpRequest();
+//         request.open('POST', 'server.php');
 
-        //JSON формат
-        request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+//         //JSON формат
+//         request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
         
-        let formData = new FormData(form);
+//         let formData = new FormData(form);
 
-        // создаем промежуточный объект и помещаем в него данные из formData
-        let obj = {};
-        formData.forEach(function(value, key) {
-            obj[key] = value;
-        });
-        let json = JSON.stringify(obj);
+//         // создаем промежуточный объект и помещаем в него данные из formData
+//         let obj = {};
+//         formData.forEach(function(value, key) {
+//             obj[key] = value;
+//         });
+//         let json = JSON.stringify(obj);
 
-        request.send(json);
+//         request.send(json);
 
-        //JSON - end
+//         //JSON - end
         
-        // проверка запроса на состояние от 1 до 4
-        request.addEventListener('readystatechange', function(){  
-            if (request.readyState < 4) {
-                statusMessage.innerHTML = message.loading;
-            } else if (request.readyState === 4 && request.status === 200) {
-                statusMessage.innerHTML = message.success;
-            } else {
-                statusMessage.innerHTML = message.failure;
-            }
-        });
-            for (let i = 0; i < input.length; i++){ // с помощью цикла очищаем все наши input 
-                input[i].value = '';
-            }
+//         // проверка запроса на состояние от 1 до 4
+//         request.addEventListener('readystatechange', function(){  
+//             if (request.readyState < 4) {
+//                 statusMessage.innerHTML = message.loading;
+//             } else if (request.readyState === 4 && request.status === 200) {
+//                 statusMessage.innerHTML = message.success;
+//             } else {
+//                 statusMessage.innerHTML = message.failure;
+//             }
+//         });
+//             for (let i = 0; i < input.length; i++){ // с помощью цикла очищаем все наши input 
+//                 input[i].value = '';
+//             }
         
-    });
-});
-
+//     });
+// });
