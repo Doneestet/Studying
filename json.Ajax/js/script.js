@@ -89,7 +89,10 @@ let inputUah = document.getElementById('uah'),
             let data = JSON.parse(response);
             inputUsd.value = inputUah.value / data.usd;
             })
-            .catch(() => inputUsd.value = "Что-то пошло не так");
+            .catch(() => inputUsd.value = "Что-то пошло не так")
+            .then(() =>{
+                inputUah.forEach((item) => item.style.display = 'none' )
+            })
     });
 
 //     inputUah.addEventListener('input', function(){
