@@ -1,3 +1,6 @@
+// require('es6-promise').polyfill();
+require('nodelist-foreach-polyfill');
+
 window.addEventListener("DOMContentLoaded", function() {
     'use strict';
     let calc = require('./parts/calc.js'),
