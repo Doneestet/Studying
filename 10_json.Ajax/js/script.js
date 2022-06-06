@@ -155,3 +155,4 @@ let inputUah = document.getElementById('uah'),
 //     // request.open(method, url, async, login, pass); // open можете принимать 5 аргументов
 //     // method - 'GET'(получаем) или 'POST'(отправляет инфо )
 //     // async - true (по умолчанию) или false; можем взаимодейстовать с сайтом в процессе или нет как alert
+

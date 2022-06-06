@@ -357,35 +357,35 @@ let form = document.querySelector('.main-form'),
         daysSum = 0,
         total = 0;
 
-        totalValue.textContent = 0;
+        totalValue.innerHTML = 0;
 
-        persons.addEventListener('change', function() {  // можно использовать input
+        persons.addEventListener('change', function() {
             personsSum = +this.value;
-            total = (daysSum + personsSum)*1000;
+            total = (personsSum + daysSum) * 1000;
 
-            if(restDays.value == ''){
-                totalValue.textContent = 0;
+            if(persons.value == '' || restDays.value == '') {
+                totalValue.innerHTML = 0; 
             } else {
-                totalValue.textContent = total;
+                totalValue.innerHTML = total;
             }
         });
 
-        restDays.addEventListener('change', function() {  // можно использовать input
+        restDays.addEventListener('change', function() {
             daysSum = +this.value;
-            total = (daysSum + personsSum)*1000;
+            total = (personsSum + daysSum) * 1000;
 
-            if(persons.value == ''){
-                totalValue.innerHTML = 0;
+            if(persons.value == '' || restDays.value == '') {
+                totalValue.innerHTML = 0; 
             } else {
                 totalValue.innerHTML = total;
             }
         });
 
         place.addEventListener('change', function(){
-            if(restDays.value == '' || persons.value == '') {
-                totalValue.innerHTML = 0;
+            if(persons.value == '' || restDays.value == '') {
+                totalValue.innerHTML = 0; 
             } else {
-                let a = total; // создаем техническую перменную
+                let a = total;
                 totalValue.innerHTML = a * this.options[this.selectedIndex].value;
             }
         });
